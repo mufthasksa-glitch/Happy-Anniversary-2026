@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Anniversary, My Love! ❤️</title>
+    <style>
+        :root {
+            --primary: #e63946;
+            --soft-pink: #fff0f3;
+            --dark: #2b2d42;
+            --light-bg: #faf9f6;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Georgia, sans-serif;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* Hero Header & Counter */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                        url('https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+            color: white;
+            text-align: center;
+            padding: 50px 20px 30px;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            font-family: Georgia, serif;
+            margin-bottom: 10px;
+        }
+
+        .timer-box {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(8px);
+            padding: 10px 25px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+
+        /* 3-Page Navigation Bar */
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav button {
+            background: none;
+            border: none;
+            padding: 15px 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            color: var(--dark);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+
+        nav button.active, nav button:hover {
+            color: var(--primary);
+            border-bottom: 3px solid var(--primary);
+        }
+
+        /* Page Content Sections */
+        .page-content {
+            display: none;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .page-content.active {
+            display: block;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            color: var(--primary);
+            font-family: Georgia, serif;
+            margin-bottom: 30px;
+        }
+
+        /* PAGE 1: TIMELINE STYLING */
+        .timeline {
+            position: relative;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: var(--primary);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+        }
+
+        .container {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+        }
+
+        .container::after {
+            content: '❤️';
+            position: absolute;
+            width: 26px;
+            height: 26px;
+            right: -13px;
+            background-color: white;
+            border: 2px solid var(--primary);
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+        }
+
+        .left { left: 0; }
+        .right { left: 50%; }
+        .right::after { left: -13px; }
+
+        .content {
+            padding: 15px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+        }
+
+        .content img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .date {
+            font-size: 0.85rem;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        /* PAGE 2: GALLERY GRID (For Photos 5–10) */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-card {
+            background: white;
+            padding: 12px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .gallery-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .gallery-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        /* PAGE 3: LOVE LETTER */
+        .letter-box {
+            background-color: var(--soft-pink);
+            padding: 40px;
+            border-radius: 20px;
+            border: 2px dashed var(--primary);
+            text-align: center;
+            font-size: 1.15rem;
+            line-height: 1.8;
+            font-style: italic;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            background-color: var(--dark);
+            color: white;
+            margin-top: 50px;
+        }
+
+        /* Mobile Responsive */
+        @media screen and (max-width: 768px) {
+            .timeline::after { left: 31px; }
+            .container { width: 100%; padding-left: 70px; padding-right: 20px; }
+            .left::after, .right::after { left: 18px; }
+            .right { left: 0%; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <div class="hero">
+        <h1>Happy Anniversary, My Love!</h1>
+        <p>A small space on the web dedicated entirely to us.</p>
+        <div class="timer-box" id="counter">Calculating time together...</div>
+    </div>
+
+    <!-- 3-Page Navigation Menu -->
+    <nav>
+        <button class="tab-btn active" onclick="switchPage('page1', this)">Our Timeline</button>
+        <button class="tab-btn" onclick="switchPage('page2', this)">Photo Gallery</button>
+        <button class="tab-btn" onclick="switchPage('page3', this)">Love Letter</button>
+    </nav>
+
+    <!-- PAGE 1: TIMELINE (4 IMAGES) -->
+    <div id="page1" class="page-content active">
+        <h2 class="section-title">Our Story Timeline</h2>
+        <div class="timeline">
+            <div class="container left">
+                <div class="content">
+                    <span class="date">Milestone 1</span>
+                    <img src="photo1.jpg" alt="Image 1">
+                    <h3>The Beginning</h3>
+                    <p>The unforgettable moment our beautiful journey started together.</p>
+                </div>
+            </div>
+            <div class="container right">
+                <div class="content">
+                    <span class="date">Milestone 2</span>
+                    <img src="photo2.jpg" alt="Image 2">
+                    <h3>Our Special Day</h3>
+                    <p>Committing to love and support each other through thick and thin.</p>
+                </div>
+            </div>
+            <div class="container left">
+                <div class="content">
+                    <span class="date">Milestone 3</span>
+                    <img src="photo3.jpg" alt="Image 3">
+                    <h3>Adventures Together</h3>
+                    <p>Exploring new places and creating memories that last a lifetime.</p>
+                </div>
+            </div>
+            <div class="container right">
+                <div class="content">
+                    <span class="date">Milestone 4</span>
+                    <img src="photo4.jpg" alt="Image 4">
+                    <h3>Building Our Future</h3>
+                    <p>Every single day with you is a gift I hold close to my heart.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE 2: PHOTO GALLERY (6 IMAGES - Total 10 Images) -->
+    <div id="page2" class="page-content">
+        <h2 class="section-title">Favorite Memories Gallery</h2>
+        <div class="gallery-grid">
+            <div class="gallery-card">
+                <img src="photo5.jpg" alt="Image 5">
+                <h4>Sweet Moments</h4>
+            </div>
+            <div class="gallery-card">
+                <img src="photo6.jpg" alt="Image 6">
+                <h4>Laughter & Joy</h4>
+            </div>
+            <div class="gallery-card">
+                <img src="photo7.jpg" alt="Image 7">
+                <h4>Unforgettable Trips</h4>
+            </div>
+            <div class="gallery-card">
+                <img src="photo8.jpg" alt="Image 8">
+                <h4>Quiet Evenings</h4>
+            </div>
+            <div class="gallery-card">
+                <img src="photo9.jpg" alt="Image 9">
+                <h4>Family & Happiness</h4>
+            </div>
+            <div class="gallery-card">
+                <img src="photo10.jpg" alt="Image 10">
+                <h4>Forever & Always</h4>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE 3: LOVE LETTER -->
+    <div id="page3" class="page-content">
+        <h2 class="section-title">To My Dearest Wife</h2>
+        <div class="letter-box">
+            <p>Thank you for being my rock, my best friend, and my constant happiness.</p><br>
+            <p>Looking through all these pictures and memories reminds me of how truly blessed I am to share life with you. Your smile still lights up my world every day.</p><br>
+            <p>Here’s to celebrating our love today, tomorrow, and forever!</p><br>
+            <p style="color: var(--primary); font-weight: bold;">Happy Anniversary! ❤️</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>Made with ❤️ specially for you</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Tab switching function
+        function switchPage(pageId, btn) {
+            document.querySelectorAll('.page-content').forEach(page => page.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            
+            document.getElementById(pageId).classList.add('active');
+            btn.classList.add('active');
+        }
+
+        // Days Counter (Set your start date: Year, Month - 1, Day)
+        // Example: Jan 15, 2021 would be Date(2021, 0, 15)
+        const startDate = new Date(2020, 0, 1); 
+
+        function updateTimer() {
+            const now = new Date();
+            const diff = now - startDate;
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            document.getElementById('counter').innerText = `${days} Beautiful Days Together ❤️`;
+        }
+        updateTimer();
+    </script>
+</body>
+</html>
