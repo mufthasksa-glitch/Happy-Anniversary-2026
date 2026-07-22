@@ -52,7 +52,7 @@
             margin-top: 15px;
         }
 
-        /* 3-Page Navigation Bar */
+        /* Navigation Bar */
         nav {
             display: flex;
             justify-content: center;
@@ -151,26 +151,15 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.06);
         }
 
-        /* IMAGE FIT FIX FOR TIMELINE */
-        .img-wrapper {
+        /* FIXED: Full Image Display in Timeline */
+        .content img {
             width: 100%;
-            height: 220px;
-            background-color: #f8f9fa;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            margin-bottom: 12px;
-        }
-
-        .img-wrapper img {
-            max-width: 100%;
-            max-height: 100%;
-            width: auto;
             height: auto;
-            object-fit: contain; /* Ensures full photo is visible */
-            border-radius: 6px;
+            max-height: 500px;
+            object-fit: contain;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: block;
         }
 
         .date {
@@ -179,7 +168,7 @@
             font-weight: bold;
         }
 
-        /* PAGE 2: GALLERY GRID */
+        /* PAGE 2: GALLERY GRID STYLING */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -199,13 +188,18 @@
             transform: translateY(-5px);
         }
 
-        /* IMAGE FIT FIX FOR GALLERY */
-        .gallery-card .img-wrapper {
-            height: 250px;
+        /* FIXED: Full Image Display in Gallery */
+        .gallery-card img {
+            width: 100%;
+            height: auto;
+            max-height: 350px;
+            object-fit: contain;
+            border-radius: 8px;
             margin-bottom: 10px;
+            display: block;
         }
 
-        /* PAGE 3: LOVE LETTER */
+        /* PAGE 3: LOVE LETTER STYLING */
         .letter-box {
             background-color: var(--soft-pink);
             padding: 40px;
@@ -225,13 +219,12 @@
             margin-top: 50px;
         }
 
-        /* Mobile Responsive */
+        /* Mobile Adjustments */
         @media screen and (max-width: 768px) {
             .timeline::after { left: 31px; }
             .container { width: 100%; padding-left: 70px; padding-right: 20px; }
             .left::after, .right::after { left: 18px; }
             .right { left: 0%; }
-            .img-wrapper { height: 200px; }
         }
     </style>
 </head>
@@ -258,9 +251,7 @@
             <div class="container left">
                 <div class="content">
                     <span class="date">Milestone 1</span>
-                    <div class="img-wrapper">
-                        <img src="photo1.jpg" alt="Image 1">
-                    </div>
+                    <img src="photo1.jpg" alt="Image 1">
                     <h3>The Beginning</h3>
                     <p>The unforgettable moment our beautiful journey started together.</p>
                 </div>
@@ -268,9 +259,7 @@
             <div class="container right">
                 <div class="content">
                     <span class="date">Milestone 2</span>
-                    <div class="img-wrapper">
-                        <img src="photo2.jpg" alt="Image 2">
-                    </div>
+                    <img src="photo2.jpg" alt="Image 2">
                     <h3>Our Special Day</h3>
                     <p>Committing to love and support each other through thick and thin.</p>
                 </div>
@@ -278,9 +267,7 @@
             <div class="container left">
                 <div class="content">
                     <span class="date">Milestone 3</span>
-                    <div class="img-wrapper">
-                        <img src="photo3.jpg" alt="Image 3">
-                    </div>
+                    <img src="photo3.jpg" alt="Image 3">
                     <h3>Adventures Together</h3>
                     <p>Exploring new places and creating memories that last a lifetime.</p>
                 </div>
@@ -288,9 +275,7 @@
             <div class="container right">
                 <div class="content">
                     <span class="date">Milestone 4</span>
-                    <div class="img-wrapper">
-                        <img src="photo3.jpg" alt="Image 4">
-                    </div>
+                    <img src="photo3.jpg" alt="Image 4">
                     <h3>Building Our Future</h3>
                     <p>Every single day with you is a gift I hold close to my heart.</p>
                 </div>
@@ -303,39 +288,27 @@
         <h2 class="section-title">Favorite Memories Gallery</h2>
         <div class="gallery-grid">
             <div class="gallery-card">
-                <div class="img-wrapper">
-                    <img src="photo5.jpg" alt="Image 5">
-                </div>
+                <img src="photo5.jpg" alt="Image 5">
                 <h4>Sweet Moments</h4>
             </div>
             <div class="gallery-card">
-                <div class="img-wrapper">
-                    <img src="photo6.jpg" alt="Image 6">
-                </div>
+                <img src="photo6.jpg" alt="Image 6">
                 <h4>Laughter & Joy</h4>
             </div>
             <div class="gallery-card">
-                <div class="img-wrapper">
-                    <img src="photo7.jpg" alt="Image 7">
-                </div>
+                <img src="photo7.jpg" alt="Image 7">
                 <h4>Unforgettable Trips</h4>
             </div>
             <div class="gallery-card">
-                <div class="img-wrapper">
-                    <img src="photo8.jpg" alt="Image 8">
-                </div>
+                <img src="photo3.jpg" alt="Image 8">
                 <h4>Quiet Evenings</h4>
             </div>
             <div class="gallery-card">
-                <div class="img-wrapper">
-                    <img src="photo3.jpg" alt="Image 9">
-                </div>
+                <img src="photo3.jpg" alt="Image 9">
                 <h4>Family & Happiness</h4>
             </div>
             <div class="gallery-card">
-                <div class="img-wrapper">
-                    <img src="photo3.jpg" alt="Image 10">
-                </div>
+                <img src="photo3.jpg" alt="Image 10">
                 <h4>Forever & Always</h4>
             </div>
         </div>
@@ -366,7 +339,8 @@
             btn.classList.add('active');
         }
 
-        const startDate = new Date(2020, 7, 24); 
+        // Days Counter
+        const startDate = new Date(2026, 6, 24); 
 
         function updateTimer() {
             const now = new Date();
