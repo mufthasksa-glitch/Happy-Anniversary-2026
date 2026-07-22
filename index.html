@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Anniversary!</title>
+    <title>Happy Anniversary, My Love! ❤️</title>
     <style>
         :root {
             --primary: #e63946;
@@ -38,14 +38,14 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 30px 20px;
+            padding: 40px 20px;
             overflow: hidden;
         }
 
         .hero h1 {
             font-size: 3.5rem;
             font-family: Georgia, serif;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             font-weight: 700;
             text-shadow: 0 4px 15px rgba(0,0,0,0.5);
             letter-spacing: 1px;
@@ -54,19 +54,34 @@
         .hero p.subtitle {
             font-size: 1.25rem;
             opacity: 0.95;
-            margin-bottom: 12px;
+            margin-bottom: 25px;
             max-width: 650px;
             font-style: italic;
             text-shadow: 0 2px 8px rgba(0,0,0,0.4);
         }
 
-        .hero p.quote {
-            font-size: 1.05rem;
-            opacity: 0.85;
-            margin-bottom: 30px;
-            max-width: 550px;
-            letter-spacing: 0.5px;
-            color: #ffe6e8;
+        /* HERO MAIN PHOTO CONTAINER */
+        .hero-photo-wrapper {
+            width: 100%;
+            max-width: 420px;
+            max-height: 380px;
+            margin-bottom: 25px;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 4px solid rgba(255, 255, 255, 0.85);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-photo-wrapper img {
+            width: 100%;
+            height: 100%;
+            max-height: 380px;
+            object-fit: cover;
+            display: block;
         }
 
         /* Live Timer Badge Pill */
@@ -82,7 +97,7 @@
             font-weight: 600;
             letter-spacing: 0.5px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
 
         /* Explore Button */
@@ -306,7 +321,7 @@
         @media screen and (max-width: 768px) {
             .hero h1 { font-size: 2.4rem; }
             .hero p.subtitle { font-size: 1.05rem; }
-            .hero p.quote { font-size: 0.9rem; }
+            .hero-photo-wrapper { max-width: 90%; max-height: 280px; }
             .timer-box { font-size: 0.95rem; padding: 12px 20px; }
             .timeline::after { left: 31px; }
             .container { width: 100%; padding-left: 70px; padding-right: 20px; }
@@ -329,11 +344,11 @@
 
         <h1>Happy 6th Anniversary, My Love ❤️</h1>
         <p class="subtitle">"From a simple conversation on a beach to building a beautiful family, every moment with you has been my greatest blessing."</p>
-        <p class="quote">This little website is my way of saying thank you...
-for your love,
-your patience,
-your sacrifices,
-and for believing in us.</p>
+
+        <!-- REPLACED: NEW HERO IMAGE HOLDER -->
+        <div class="hero-photo-wrapper">
+            <img src="photo3.jpg" alt="Our Best Photo">
+        </div>
 
         <div class="timer-box" id="counter">Calculating time together...</div>
 
@@ -445,8 +460,8 @@ and for believing in us.</p>
             document.getElementById('main-nav').scrollIntoView({ behavior: 'smooth' });
         }
 
-        // Live Realtime Ticking Counter (Days, Hours, Minutes, Seconds)
-        const startDate = new Date(2020, 7, 24, 21, 30); 
+        // Live Realtime Ticking Counter
+        const startDate = new Date(2020, 7, 24, 21.30, 0); 
 
         function updateTimer() {
             const now = new Date();
@@ -462,7 +477,7 @@ and for believing in us.</p>
         }
 
         updateTimer();
-        setInterval(updateTimer, 1000); // Ticks every 1 second
+        setInterval(updateTimer, 1000);
     </script>
 </body>
 </html>
