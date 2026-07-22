@@ -25,34 +25,69 @@
             line-height: 1.6;
         }
 
-        /* Hero Header & Counter */
+        /* FULL PAGE COVER (100vh) */
         .hero {
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
-                        url('https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+            min-height: 100vh;
+            width: 100%;
+            background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), 
+                        url('https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
             color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
-            padding: 50px 20px 30px;
+            padding: 20px;
         }
 
         .hero h1 {
-            font-size: 2.8rem;
+            font-size: 3.2rem;
             font-family: Georgia, serif;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+            font-weight: 700;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.4);
         }
 
+        .hero p.subtitle {
+            font-size: 1.15rem;
+            opacity: 0.95;
+            margin-bottom: 25px;
+            max-width: 600px;
+            font-style: italic;
+        }
+
+        /* Live Timer Badge Pill */
         .timer-box {
             display: inline-block;
-            background: rgba(255, 255, 255, 0.25);
-            backdrop-filter: blur(8px);
-            padding: 10px 25px;
-            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.22);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 12px 30px;
+            border-radius: 40px;
             border: 1px solid rgba(255, 255, 255, 0.4);
             font-size: 1.1rem;
-            font-weight: bold;
-            margin-top: 15px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
         }
 
-        /* Navigation Bar */
+        /* Scroll indicator arrow */
+        .scroll-down {
+            position: absolute;
+            bottom: 20px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            letter-spacing: 1px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-8px); }
+            60% { transform: translateY(-4px); }
+        }
+
+        /* 3-Page Navigation Bar */
         nav {
             display: flex;
             justify-content: center;
@@ -66,7 +101,7 @@
         nav button {
             background: none;
             border: none;
-            padding: 15px 25px;
+            padding: 18px 25px;
             font-size: 1rem;
             font-weight: bold;
             color: var(--dark);
@@ -97,10 +132,10 @@
             font-size: 2.2rem;
             color: var(--primary);
             font-family: Georgia, serif;
-            margin-bottom: 30px;
+            margin-bottom: 35px;
         }
 
-        /* PAGE 1: TIMELINE STYLING */
+        /* PAGE 1: TIMELINE */
         .timeline {
             position: relative;
             margin: 0 auto;
@@ -151,7 +186,7 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.06);
         }
 
-        /* FIXED: Full Image Display in Timeline */
+        /* Full Image View without cropping */
         .content img {
             width: 100%;
             height: auto;
@@ -168,7 +203,7 @@
             font-weight: bold;
         }
 
-        /* PAGE 2: GALLERY GRID STYLING */
+        /* PAGE 2: GALLERY GRID */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -188,7 +223,6 @@
             transform: translateY(-5px);
         }
 
-        /* FIXED: Full Image Display in Gallery */
         .gallery-card img {
             width: 100%;
             height: auto;
@@ -199,7 +233,7 @@
             display: block;
         }
 
-        /* PAGE 3: LOVE LETTER STYLING */
+        /* PAGE 3: LOVE LETTER */
         .letter-box {
             background-color: var(--soft-pink);
             padding: 40px;
@@ -219,8 +253,11 @@
             margin-top: 50px;
         }
 
-        /* Mobile Adjustments */
+        /* Mobile Layout */
         @media screen and (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            .hero p.subtitle { font-size: 1rem; }
+            .timer-box { font-size: 0.95rem; padding: 10px 20px; }
             .timeline::after { left: 31px; }
             .container { width: 100%; padding-left: 70px; padding-right: 20px; }
             .left::after, .right::after { left: 18px; }
@@ -230,16 +267,17 @@
 </head>
 <body>
 
-    <!-- Header Section -->
+    <!-- FULL PAGE COVER FRONT PAGE -->
     <div class="hero">
-        <h1>Happy Anniversary, My Love!</h1>
-        <p>A small space on the web dedicated entirely to us.</p>
+        <h1>Happy Anniversary!</h1>
+        <p class="subtitle">A look back at our journey together, every step of the way.</p>
         <div class="timer-box" id="counter">Calculating time together...</div>
+        <div class="scroll-down">↓ Scroll down for our story</div>
     </div>
 
-    <!-- Navigation Menu -->
+    <!-- Sticky Navigation Menu -->
     <nav>
-        <button class="tab-btn active" onclick="switchPage('page1', this)">Our Timeline</button>
+        <button class="tab-btn active" onclick="switchPage('page1', this)">Our Story</button>
         <button class="tab-btn" onclick="switchPage('page2', this)">Photo Gallery</button>
         <button class="tab-btn" onclick="switchPage('page3', this)">Love Letter</button>
     </nav>
@@ -275,7 +313,7 @@
             <div class="container right">
                 <div class="content">
                     <span class="date">Milestone 4</span>
-                    <img src="photo3.jpg" alt="Image 4">
+                    <img src="photo4.jpg" alt="Image 4">
                     <h3>Building Our Future</h3>
                     <p>Every single day with you is a gift I hold close to my heart.</p>
                 </div>
@@ -300,15 +338,15 @@
                 <h4>Unforgettable Trips</h4>
             </div>
             <div class="gallery-card">
-                <img src="photo3.jpg" alt="Image 8">
+                <img src="photo8.jpg" alt="Image 8">
                 <h4>Quiet Evenings</h4>
             </div>
             <div class="gallery-card">
-                <img src="photo3.jpg" alt="Image 9">
+                <img src="photo9.jpg" alt="Image 9">
                 <h4>Family & Happiness</h4>
             </div>
             <div class="gallery-card">
-                <img src="photo3.jpg" alt="Image 10">
+                <img src="photo10.jpg" alt="Image 10">
                 <h4>Forever & Always</h4>
             </div>
         </div>
@@ -329,8 +367,8 @@
         <p>Made with ❤️ specially for you</p>
     </footer>
 
-    <!-- Scripts -->
     <script>
+        // Tab switching function
         function switchPage(pageId, btn) {
             document.querySelectorAll('.page-content').forEach(page => page.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -339,16 +377,24 @@
             btn.classList.add('active');
         }
 
-        // Days Counter
-        const startDate = new Date(2026, 6, 24); 
+        // Detailed Live Timer (Set your start date & time: Year, Month - 1, Day, Hour, Minute)
+        // Example: Jan 15, 2020 at 00:00 would be Date(2020, 0, 15, 0, 0)
+        const startDate = new Date(2020, 0, 1, 0, 0); 
 
         function updateTimer() {
             const now = new Date();
             const diff = now - startDate;
+
             const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            document.getElementById('counter').innerText = `${days} Beautiful Days Together ❤️`;
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const minutes = Math.floor((diff / (1000 * 60)) % 60);
+
+            document.getElementById('counter').innerText = 
+                `${days} Days, ${hours} Hours, and ${minutes} Minutes Together ❤️`;
         }
+
         updateTimer();
+        setInterval(updateTimer, 60000); // Updates every minute
     </script>
 </body>
 </html>
