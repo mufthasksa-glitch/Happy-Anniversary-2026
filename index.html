@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Anniversary, My Love! ❤️</title>
+    <title>Happy Anniversary</title>
     <style>
         :root {
             --primary: #e63946;
@@ -60,27 +60,23 @@
             text-shadow: 0 2px 8px rgba(0,0,0,0.4);
         }
 
-        /* HERO MAIN PHOTO CONTAINER */
+        /* HERO MAIN PHOTO CONTAINER - AUTO HEIGHT & NO CROPPING */
         .hero-photo-wrapper {
-            width: 100%;
-            max-width: 420px;
-            max-height: 380px;
+            width: 90%;
+            max-width: 450px;
+            height: auto; /* Fits full natural photo height */
             margin-bottom: 25px;
             border-radius: 20px;
             overflow: hidden;
             border: 4px solid rgba(255, 255, 255, 0.85);
             box-shadow: 0 12px 30px rgba(0,0,0,0.4);
             background-color: rgba(255, 255, 255, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
         .hero-photo-wrapper img {
             width: 100%;
-            height: 100%;
-            max-height: 380px;
-            object-fit: cover;
+            height: auto; /* Keeps original aspect ratio */
+            object-fit: contain; /* Prevents cropping */
             display: block;
         }
 
@@ -321,7 +317,7 @@
         @media screen and (max-width: 768px) {
             .hero h1 { font-size: 2.4rem; }
             .hero p.subtitle { font-size: 1.05rem; }
-            .hero-photo-wrapper { max-width: 90%; max-height: 280px; }
+            .hero-photo-wrapper { max-width: 95%; }
             .timer-box { font-size: 0.95rem; padding: 12px 20px; }
             .timeline::after { left: 31px; }
             .container { width: 100%; padding-left: 70px; padding-right: 20px; }
@@ -345,7 +341,7 @@
         <h1>Happy 6th Anniversary, My Love ❤️</h1>
         <p class="subtitle">"From a simple conversation on a beach to building a beautiful family, every moment with you has been my greatest blessing."</p>
 
-        <!-- REPLACED: NEW HERO IMAGE HOLDER -->
+        <!-- FULL AUTO-HEIGHT HERO IMAGE -->
         <div class="hero-photo-wrapper">
             <img src="photo3.jpg" alt="Our Best Photo">
         </div>
