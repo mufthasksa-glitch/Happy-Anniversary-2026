@@ -328,8 +328,8 @@
 <body>
 
     <!-- BACKGROUND AUDIO ELEMENT -->
-    <audio id="bgMusic" loop>
-        <source src="music.mpeg" type="audio/mpeg">
+    <audio id="bgMusic" loop preload="auto">
+        <source src="music.mp3" type="audio/mpeg">
         Your browser does not support audio playback.
     </audio>
 
@@ -464,25 +464,35 @@
     <script>
         const bgAudio = document.getElementById('bgMusic');
 
+        function playMusic() {
+            bgAudio.volume = 0.5; // Medium Volume
+            bgAudio.play().then(() => {
+                // Once played successfully, remove global touch listeners
+                document.removeEventListener('click', playMusic);
+                document.removeEventListener('touchstart', playMusic);
+                document.removeEventListener('scroll', playMusic);
+            }).catch(e => console.log("Autoplay waiting for interaction:", e));
+        }
+
+        // Try playing immediately as soon as page loads
+        window.onload = function() {
+            playMusic();
+        };
+
+        // Fallback: If browser blocks immediate autoplay, start on first tap/scroll anywhere on screen
+        document.addEventListener('click', playMusic);
+        document.addEventListener('touchstart', playMusic);
+        document.addEventListener('scroll', playMusic);
+
         function switchPage(pageId, btn) {
             document.querySelectorAll('.page-content').forEach(page => page.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
             
             document.getElementById(pageId).classList.add('active');
             btn.classList.add('active');
-
-            // Try playing audio when switching tabs if it hasn't started yet
-            if (bgAudio.paused) {
-                bgAudio.volume = 0.5; // Medium Volume
-                bgAudio.play().catch(e => console.log("Audio waiting for user click."));
-            }
         }
 
         function scrollToNav() {
-            // Play background music at medium volume on button click
-            bgAudio.volume = 0.5; // 0.5 = 50% Medium Volume
-            bgAudio.play().catch(e => console.log("Playback error:", e));
-
             document.getElementById('main-nav').scrollIntoView({ behavior: 'smooth' });
         }
 
