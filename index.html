@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>Happy Anniversary</title>
     <style>
         :root {
@@ -16,21 +16,23 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Georgia, sans-serif;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
             background-color: var(--light-bg);
             color: var(--dark);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        /* FULL PAGE HERO FRONT COVER */
+        /* HERO FRONT COVER - MOBILE OPTIMIZED */
         .hero {
             position: relative;
             min-height: 100vh;
             width: 100%;
-            background: linear-gradient(rgba(20, 10, 15, 0.65), rgba(20, 10, 15, 0.65)), 
+            background: linear-gradient(rgba(20, 10, 15, 0.70), rgba(20, 10, 15, 0.70)), 
                         url('https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
             color: white;
             display: flex;
@@ -38,62 +40,66 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 40px 20px;
+            padding: 30px 16px;
             overflow: hidden;
         }
 
         .hero h1 {
-            font-size: 3.5rem;
+            font-size: clamp(2rem, 6vw, 3.5rem);
             font-family: Georgia, serif;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             font-weight: 700;
             text-shadow: 0 4px 15px rgba(0,0,0,0.5);
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
+            line-height: 1.2;
         }
 
         .hero p.subtitle {
-            font-size: 1.25rem;
+            font-size: clamp(0.95rem, 3.5vw, 1.2rem);
             opacity: 0.95;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             max-width: 650px;
             font-style: italic;
             text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+            padding: 0 10px;
         }
 
-        /* HERO MAIN PHOTO CONTAINER - AUTO HEIGHT & NO CROPPING */
+        /* HERO PHOTO WRAPPER */
         .hero-photo-wrapper {
-            width: 90%;
-            max-width: 450px;
+            width: 100%;
+            max-width: 380px;
             height: auto;
-            margin-bottom: 25px;
-            border-radius: 20px;
+            margin-bottom: 20px;
+            border-radius: 16px;
             overflow: hidden;
-            border: 4px solid rgba(255, 255, 255, 0.85);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+            border: 3px solid rgba(255, 255, 255, 0.85);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
             background-color: rgba(255, 255, 255, 0.1);
         }
 
         .hero-photo-wrapper img {
             width: 100%;
             height: auto;
+            max-height: 50vh;
             object-fit: contain;
             display: block;
         }
 
-        /* Live Timer Badge Pill */
+        /* Live Timer Pill */
         .timer-box {
             display: inline-block;
-            background: rgba(255, 255, 255, 0.18);
+            background: rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            padding: 14px 35px;
+            padding: 10px 20px;
             border-radius: 50px;
             border: 1px solid rgba(255, 255, 255, 0.35);
-            font-size: 1.15rem;
+            font-size: clamp(0.85rem, 3vw, 1.1rem);
             font-weight: 600;
             letter-spacing: 0.5px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-            margin-bottom: 25px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+            margin-bottom: 20px;
+            max-width: 95%;
         }
 
         /* Explore Button */
@@ -101,24 +107,24 @@
             background-color: var(--primary);
             color: white;
             text-decoration: none;
-            padding: 12px 28px;
+            padding: 14px 32px;
             border-radius: 30px;
             font-weight: bold;
-            font-size: 0.95rem;
-            letter-spacing: 1px;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
             transition: all 0.3s ease;
             box-shadow: 0 5px 15px rgba(230, 57, 70, 0.4);
             border: none;
             cursor: pointer;
+            width: auto;
+            min-width: 200px;
         }
 
-        .hero-btn:hover {
-            transform: translateY(-3px);
-            background-color: #d62828;
-            box-shadow: 0 8px 20px rgba(230, 57, 70, 0.6);
+        .hero-btn:active {
+            transform: scale(0.98);
         }
 
-        /* Animated Floating Hearts in Background */
+        /* Floating Hearts Animation */
         .bg-hearts {
             position: absolute;
             top: 0;
@@ -138,37 +144,40 @@
         }
 
         @keyframes floatUp {
-            0% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 0.8;
-            }
-            100% {
-                transform: translateY(-110vh) rotate(360deg);
-                opacity: 0;
-            }
+            0% { transform: translateY(0) rotate(0deg); opacity: 0.8; }
+            100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
         }
 
-        /* 3-Page Navigation Bar */
+        /* STICKY MOBILE NAVIGATION BAR */
         nav {
             display: flex;
-            justify-content: center;
+            justify-content: space-around;
             background-color: white;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
             position: sticky;
             top: 0;
             z-index: 100;
+            overflow-x: auto;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        nav::-webkit-scrollbar {
+            display: none;
         }
 
         nav button {
             background: none;
             border: none;
-            padding: 18px 25px;
-            font-size: 1rem;
-            font-weight: bold;
+            padding: 16px 14px;
+            font-size: 0.95rem;
+            font-weight: 600;
             color: var(--dark);
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             border-bottom: 3px solid transparent;
+            flex: 1;
+            text-align: center;
         }
 
         nav button.active, nav button:hover {
@@ -176,12 +185,12 @@
             border-bottom: 3px solid var(--primary);
         }
 
-        /* Page Content Sections */
+        /* PAGE CONTENT CONTAINERS */
         .page-content {
             display: none;
-            max-width: 900px;
-            margin: 40px auto;
-            padding: 0 20px;
+            max-width: 800px;
+            margin: 25px auto;
+            padding: 0 16px;
         }
 
         .page-content.active {
@@ -190,57 +199,51 @@
 
         .section-title {
             text-align: center;
-            font-size: 2.2rem;
+            font-size: clamp(1.6rem, 5vw, 2.2rem);
             color: var(--primary);
             font-family: Georgia, serif;
-            margin-bottom: 35px;
+            margin-bottom: 25px;
         }
 
-        /* PAGE 1: OPTION B STEP CARDS TIMELINE DESIGN (NO CROPPING) */
+        /* PAGE 1: TIMELINE CARDS */
         .step-timeline {
             display: flex;
             flex-direction: column;
-            gap: 25px;
+            gap: 20px;
         }
 
         .step-card {
             display: flex;
             flex-direction: row;
             background: white;
-            border-radius: 16px;
+            border-radius: 14px;
             overflow: hidden;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
-            border-left: 6px solid var(--primary);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--primary);
             align-items: center;
-        }
-
-        .step-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 30px rgba(230, 57, 70, 0.15);
         }
 
         .step-img-container {
             width: 40%;
-            min-width: 220px;
-            background-color: #f7f7f7;
+            min-width: 140px;
+            background-color: #f8f8f8;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 10px;
+            padding: 8px;
         }
 
         .step-img {
             width: 100%;
             height: auto;
-            max-height: 380px;
+            max-height: 280px;
             object-fit: contain;
-            border-radius: 8px;
+            border-radius: 6px;
             display: block;
         }
 
         .step-info {
-            padding: 25px;
+            padding: 16px;
             width: 60%;
             display: flex;
             flex-direction: column;
@@ -250,78 +253,97 @@
         .step-tag {
             color: var(--primary);
             font-weight: bold;
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 6px;
+            letter-spacing: 0.8px;
+            margin-bottom: 4px;
         }
 
         .step-info h3 {
             font-family: Georgia, serif;
-            font-size: 1.4rem;
-            margin-bottom: 10px;
+            font-size: clamp(1.1rem, 4vw, 1.3rem);
+            margin-bottom: 6px;
+            line-height: 1.3;
         }
 
-        /* PAGE 2: GALLERY GRID (NO CROPPING) */
+        .step-info p {
+            font-size: 0.9rem;
+            color: #555;
+            line-height: 1.4;
+        }
+
+        /* PAGE 2: GALLERY GRID */
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 14px;
         }
 
         .gallery-card {
             background: white;
-            padding: 12px;
+            padding: 10px;
             border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
             text-align: center;
-            transition: transform 0.3s;
-        }
-
-        .gallery-card:hover {
-            transform: translateY(-5px);
         }
 
         .gallery-card img {
             width: 100%;
             height: auto;
-            max-height: 400px;
+            max-height: 300px;
             object-fit: contain;
             border-radius: 8px;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             display: block;
+        }
+
+        .gallery-card h4 {
+            font-size: 0.85rem;
+            color: var(--dark);
+            font-weight: 600;
         }
 
         /* PAGE 3: LOVE LETTER */
         .letter-box {
             background-color: var(--soft-pink);
-            padding: 40px;
-            border-radius: 20px;
+            padding: 25px 18px;
+            border-radius: 16px;
             border: 2px dashed var(--primary);
             text-align: center;
-            font-size: 1.15rem;
-            line-height: 1.8;
+            font-size: 1.05rem;
+            line-height: 1.75;
             font-style: italic;
         }
 
         footer {
             text-align: center;
-            padding: 25px;
+            padding: 20px 15px;
             background-color: var(--dark);
             color: white;
-            margin-top: 50px;
+            margin-top: 40px;
+            font-size: 0.9rem;
         }
 
-        /* Mobile Adjustments */
-        @media screen and (max-width: 768px) {
-            .hero h1 { font-size: 2.4rem; }
-            .hero p.subtitle { font-size: 1.05rem; }
-            .hero-photo-wrapper { max-width: 95%; }
-            .timer-box { font-size: 0.95rem; padding: 12px 20px; }
-            
-            .step-card { flex-direction: column; }
-            .step-img-container { width: 100%; }
-            .step-info { width: 100%; padding: 20px; }
+        /* MOBILE SPECIFIC BREAKPOINTS */
+        @media screen and (max-width: 600px) {
+            .step-card {
+                flex-direction: column;
+            }
+            .step-img-container {
+                width: 100%;
+                padding: 12px;
+            }
+            .step-img {
+                max-height: 250px;
+            }
+            .step-info {
+                width: 100%;
+                padding: 16px;
+                text-align: center;
+            }
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
     </style>
 </head>
@@ -333,7 +355,7 @@
         Your browser does not support audio playback.
     </audio>
 
-    <!-- RICH ANIMATED FRONT COVER -->
+    <!-- FRONT COVER -->
     <div class="hero">
         <div class="bg-hearts">
             <span style="left: 10%; animation-duration: 7s;">❤️</span>
@@ -346,7 +368,6 @@
         <h1>Happy 6th Anniversary, My Love ❤️</h1>
         <p class="subtitle">"From a simple conversation on a beach to building a beautiful family, every moment with you has been my greatest blessing."</p>
 
-        <!-- FULL AUTO-HEIGHT HERO IMAGE -->
         <div class="hero-photo-wrapper">
             <img src="photo3.jpg" alt="Our Best Photo">
         </div>
@@ -356,14 +377,14 @@
         <button class="hero-btn" onclick="scrollToNav()">Explore Our Story ↓</button>
     </div>
 
-    <!-- Sticky Navigation Menu -->
+    <!-- NAVIGATION BAR -->
     <nav id="main-nav">
         <button class="tab-btn active" onclick="switchPage('page1', this)">Our Story</button>
         <button class="tab-btn" onclick="switchPage('page2', this)">Photo Gallery</button>
         <button class="tab-btn" onclick="switchPage('page3', this)">Love Letter</button>
     </nav>
 
-    <!-- PAGE 1: OPTION B STEP CARDS TIMELINE -->
+    <!-- PAGE 1: STORY TIMELINE -->
     <div id="page1" class="page-content active">
         <h2 class="section-title">Our Story Timeline</h2>
         <div class="step-timeline">
@@ -415,7 +436,7 @@
         </div>
     </div>
 
-    <!-- PAGE 2: PHOTO GALLERY -->
+    <!-- PAGE 2: GALLERY -->
     <div id="page2" class="page-content">
         <h2 class="section-title">Favorite Memories Gallery</h2>
         <div class="gallery-grid">
@@ -465,21 +486,18 @@
         const bgAudio = document.getElementById('bgMusic');
 
         function playMusic() {
-            bgAudio.volume = 0.5; // Medium Volume
+            bgAudio.volume = 0.2;
             bgAudio.play().then(() => {
-                // Once played successfully, remove global touch listeners
                 document.removeEventListener('click', playMusic);
                 document.removeEventListener('touchstart', playMusic);
                 document.removeEventListener('scroll', playMusic);
-            }).catch(e => console.log("Autoplay waiting for interaction:", e));
+            }).catch(e => console.log("Autoplay waiting for user interaction:", e));
         }
 
-        // Try playing immediately as soon as page loads
         window.onload = function() {
             playMusic();
         };
 
-        // Fallback: If browser blocks immediate autoplay, start on first tap/scroll anywhere on screen
         document.addEventListener('click', playMusic);
         document.addEventListener('touchstart', playMusic);
         document.addEventListener('scroll', playMusic);
@@ -496,7 +514,6 @@
             document.getElementById('main-nav').scrollIntoView({ behavior: 'smooth' });
         }
 
-        // Live Realtime Ticking Counter
         const startDate = new Date(2020, 7, 24, 21, 30, 0); 
 
         function updateTimer() {
