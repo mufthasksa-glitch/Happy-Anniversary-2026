@@ -196,7 +196,7 @@
             margin-bottom: 35px;
         }
 
-        /* PAGE 1: OPTION B STEP CARDS TIMELINE DESIGN */
+        /* PAGE 1: OPTION B STEP CARDS TIMELINE DESIGN (NO CROPPING) */
         .step-timeline {
             display: flex;
             flex-direction: column;
@@ -212,6 +212,7 @@
             box-shadow: 0 8px 20px rgba(0,0,0,0.06);
             border-left: 6px solid var(--primary);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            align-items: center; /* Aligns text & image smoothly */
         }
 
         .step-card:hover {
@@ -219,15 +220,28 @@
             box-shadow: 0 12px 30px rgba(230, 57, 70, 0.15);
         }
 
-        .step-img {
+        .step-img-container {
             width: 40%;
-            min-width: 200px;
-            max-height: 250px;
-            object-fit: cover;
+            min-width: 220px;
+            background-color: #f7f7f7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+        }
+
+        .step-img {
+            width: 100%;
+            height: auto;
+            max-height: 380px; /* Limits excessive height for long portrait photos */
+            object-fit: contain; /* Prevents cropping completely */
+            border-radius: 8px;
+            display: block;
         }
 
         .step-info {
             padding: 25px;
+            width: 60%;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -248,7 +262,7 @@
             margin-bottom: 10px;
         }
 
-        /* PAGE 2: GALLERY GRID */
+        /* PAGE 2: GALLERY GRID (NO CROPPING) */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -271,8 +285,8 @@
         .gallery-card img {
             width: 100%;
             height: auto;
-            max-height: 350px;
-            object-fit: contain;
+            max-height: 400px;
+            object-fit: contain; /* Keeps full uncropped aspect ratio */
             border-radius: 8px;
             margin-bottom: 10px;
             display: block;
@@ -304,8 +318,10 @@
             .hero p.subtitle { font-size: 1.05rem; }
             .hero-photo-wrapper { max-width: 95%; }
             .timer-box { font-size: 0.95rem; padding: 12px 20px; }
+            
             .step-card { flex-direction: column; }
-            .step-img { width: 100%; max-height: 250px; }
+            .step-img-container { width: 100%; }
+            .step-info { width: 100%; padding: 20px; }
         }
     </style>
 </head>
@@ -341,13 +357,15 @@
         <button class="tab-btn" onclick="switchPage('page3', this)">Love Letter</button>
     </nav>
 
-    <!-- PAGE 1: OPTION B STEP CARDS TIMELINE -->
+    <!-- PAGE 1: OPTION B STEP CARDS TIMELINE (FULL AUTO HEIGHT / NO CROPPING) -->
     <div id="page1" class="page-content active">
         <h2 class="section-title">Our Story Timeline</h2>
         <div class="step-timeline">
             
             <div class="step-card">
-                <img src="photo11.jpg" alt="Image 1" class="step-img">
+                <div class="step-img-container">
+                    <img src="photo11.jpg" alt="Image 1" class="step-img">
+                </div>
                 <div class="step-info">
                     <span class="step-tag">First Photo</span>
                     <h3>The Beginning</h3>
@@ -356,7 +374,9 @@
             </div>
 
             <div class="step-card">
-                <img src="photo13.jpg" alt="Image 2" class="step-img">
+                <div class="step-img-container">
+                    <img src="photo13.jpg" alt="Image 2" class="step-img">
+                </div>
                 <div class="step-info">
                     <span class="step-tag">First Umrah</span>
                     <h3>Our First Umrah</h3>
@@ -365,7 +385,9 @@
             </div>
 
             <div class="step-card">
-                <img src="photo12.jpg" alt="Image 3" class="step-img">
+                <div class="step-img-container">
+                    <img src="photo12.jpg" alt="Image 3" class="step-img">
+                </div>
                 <div class="step-info">
                     <span class="step-tag">First Trip</span>
                     <h3>Adventures Together</h3>
@@ -374,7 +396,9 @@
             </div>
 
             <div class="step-card">
-                <img src="photo15.jpg" alt="Image 4" class="step-img">
+                <div class="step-img-container">
+                    <img src="photo15.jpg" alt="Image 4" class="step-img">
+                </div>
                 <div class="step-info">
                     <span class="step-tag">First Vacation</span>
                     <h3>My First Vacation</h3>
