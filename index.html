@@ -64,7 +64,7 @@
         .hero-photo-wrapper {
             width: 90%;
             max-width: 450px;
-            height: auto; /* Fits full natural photo height */
+            height: auto;
             margin-bottom: 25px;
             border-radius: 20px;
             overflow: hidden;
@@ -75,8 +75,8 @@
 
         .hero-photo-wrapper img {
             width: 100%;
-            height: auto; /* Keeps original aspect ratio */
-            object-fit: contain; /* Prevents cropping */
+            height: auto;
+            object-fit: contain;
             display: block;
         }
 
@@ -196,71 +196,56 @@
             margin-bottom: 35px;
         }
 
-        /* PAGE 1: TIMELINE */
-        .timeline {
-            position: relative;
-            margin: 0 auto;
-        }
-
-        .timeline::after {
-            content: '';
-            position: absolute;
-            width: 4px;
-            background-color: var(--primary);
-            top: 0;
-            bottom: 0;
-            left: 50%;
-            margin-left: -2px;
-        }
-
-        .container {
-            padding: 10px 40px;
-            position: relative;
-            width: 50%;
-        }
-
-        .container::after {
-            content: '❤️';
-            position: absolute;
-            width: 26px;
-            height: 26px;
-            right: -13px;
-            background-color: white;
-            border: 2px solid var(--primary);
-            top: 15px;
-            border-radius: 50%;
-            z-index: 1;
+        /* PAGE 1: OPTION B STEP CARDS TIMELINE DESIGN */
+        .step-timeline {
             display: flex;
-            align-items: center;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .step-card {
+            display: flex;
+            flex-direction: row;
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+            border-left: 6px solid var(--primary);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .step-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(230, 57, 70, 0.15);
+        }
+
+        .step-img {
+            width: 40%;
+            min-width: 200px;
+            max-height: 250px;
+            object-fit: cover;
+        }
+
+        .step-info {
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
             justify-content: center;
-            font-size: 10px;
         }
 
-        .left { left: 0; }
-        .right { left: 50%; }
-        .right::after { left: -13px; }
-
-        .content {
-            padding: 15px;
-            background-color: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
-        }
-
-        .content img {
-            width: 100%;
-            height: auto;
-            max-height: 500px;
-            object-fit: contain;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            display: block;
-        }
-
-        .date {
-            font-size: 0.85rem;
+        .step-tag {
             color: var(--primary);
             font-weight: bold;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+
+        .step-info h3 {
+            font-family: Georgia, serif;
+            font-size: 1.4rem;
+            margin-bottom: 10px;
         }
 
         /* PAGE 2: GALLERY GRID */
@@ -319,10 +304,8 @@
             .hero p.subtitle { font-size: 1.05rem; }
             .hero-photo-wrapper { max-width: 95%; }
             .timer-box { font-size: 0.95rem; padding: 12px 20px; }
-            .timeline::after { left: 31px; }
-            .container { width: 100%; padding-left: 70px; padding-right: 20px; }
-            .left::after, .right::after { left: 18px; }
-            .right { left: 0%; }
+            .step-card { flex-direction: column; }
+            .step-img { width: 100%; max-height: 250px; }
         }
     </style>
 </head>
@@ -358,42 +341,47 @@
         <button class="tab-btn" onclick="switchPage('page3', this)">Love Letter</button>
     </nav>
 
-    <!-- PAGE 1: TIMELINE -->
+    <!-- PAGE 1: OPTION B STEP CARDS TIMELINE -->
     <div id="page1" class="page-content active">
         <h2 class="section-title">Our Story Timeline</h2>
-        <div class="timeline">
-            <div class="container left">
-                <div class="content">
-                    <span class="date">First Photo</span>
-                    <img src="photo11.jpg" alt="Image 1">
+        <div class="step-timeline">
+            
+            <div class="step-card">
+                <img src="photo11.jpg" alt="Image 1" class="step-img">
+                <div class="step-info">
+                    <span class="step-tag">First Photo</span>
                     <h3>The Beginning</h3>
                     <p>The unforgettable moment our beautiful journey started together.</p>
                 </div>
             </div>
-            <div class="container right">
-                <div class="content">
-                    <span class="date">First Umrah</span>
-                    <img src="photo13.jpg" alt="Image 2">
+
+            <div class="step-card">
+                <img src="photo13.jpg" alt="Image 2" class="step-img">
+                <div class="step-info">
+                    <span class="step-tag">First Umrah</span>
                     <h3>Our First Umrah</h3>
                     <p>A journey of faith, gratitude, and countless blessings—our hearts found peace together.</p>
                 </div>
             </div>
-            <div class="container left">
-                <div class="content">
-                    <span class="date">First Trip</span>
-                    <img src="photo12.jpg" alt="Image 3">
+
+            <div class="step-card">
+                <img src="photo12.jpg" alt="Image 3" class="step-img">
+                <div class="step-info">
+                    <span class="step-tag">First Trip</span>
                     <h3>Adventures Together</h3>
                     <p>The journey that brought us even closer and filled our hearts with unforgettable memories.</p>
                 </div>
             </div>
-            <div class="container right">
-                <div class="content">
-                    <span class="date">First Vacation</span>
-                    <img src="photo15.jpg" alt="Image 4">
+
+            <div class="step-card">
+                <img src="photo15.jpg" alt="Image 4" class="step-img">
+                <div class="step-info">
+                    <span class="step-tag">First Vacation</span>
                     <h3>My First Vacation</h3>
                     <p>The most awaited reunion, filled with love, laughter, and unforgettable moments.</p>
                 </div>
             </div>
+
         </div>
     </div>
 
