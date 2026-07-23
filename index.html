@@ -212,7 +212,7 @@
             box-shadow: 0 8px 20px rgba(0,0,0,0.06);
             border-left: 6px solid var(--primary);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            align-items: center; /* Aligns text & image smoothly */
+            align-items: center;
         }
 
         .step-card:hover {
@@ -233,8 +233,8 @@
         .step-img {
             width: 100%;
             height: auto;
-            max-height: 380px; /* Limits excessive height for long portrait photos */
-            object-fit: contain; /* Prevents cropping completely */
+            max-height: 380px;
+            object-fit: contain;
             border-radius: 8px;
             display: block;
         }
@@ -286,7 +286,7 @@
             width: 100%;
             height: auto;
             max-height: 400px;
-            object-fit: contain; /* Keeps full uncropped aspect ratio */
+            object-fit: contain;
             border-radius: 8px;
             margin-bottom: 10px;
             display: block;
@@ -327,6 +327,12 @@
 </head>
 <body>
 
+    <!-- BACKGROUND AUDIO ELEMENT -->
+    <audio id="bgMusic" loop>
+        <source src="music.mp3" type="audio/mpeg">
+        Your browser does not support audio playback.
+    </audio>
+
     <!-- RICH ANIMATED FRONT COVER -->
     <div class="hero">
         <div class="bg-hearts">
@@ -357,7 +363,7 @@
         <button class="tab-btn" onclick="switchPage('page3', this)">Love Letter</button>
     </nav>
 
-    <!-- PAGE 1: OPTION B STEP CARDS TIMELINE (FULL AUTO HEIGHT / NO CROPPING) -->
+    <!-- PAGE 1: OPTION B STEP CARDS TIMELINE -->
     <div id="page1" class="page-content active">
         <h2 class="section-title">Our Story Timeline</h2>
         <div class="step-timeline">
@@ -456,20 +462,32 @@
     </footer>
 
     <script>
+        const bgAudio = document.getElementById('bgMusic');
+
         function switchPage(pageId, btn) {
             document.querySelectorAll('.page-content').forEach(page => page.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
             
             document.getElementById(pageId).classList.add('active');
             btn.classList.add('active');
+
+            // Try playing audio when switching tabs if it hasn't started yet
+            if (bgAudio.paused) {
+                bgAudio.volume = 0.5; // Medium Volume
+                bgAudio.play().catch(e => console.log("Audio waiting for user click."));
+            }
         }
 
         function scrollToNav() {
+            // Play background music at medium volume on button click
+            bgAudio.volume = 0.5; // 0.5 = 50% Medium Volume
+            bgAudio.play().catch(e => console.log("Playback error:", e));
+
             document.getElementById('main-nav').scrollIntoView({ behavior: 'smooth' });
         }
 
         // Live Realtime Ticking Counter
-        const startDate = new Date(2020, 7, 24, 21.30, 0); 
+        const startDate = new Date(2020, 7, 24, 21, 30, 0); 
 
         function updateTimer() {
             const now = new Date();
